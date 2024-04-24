@@ -6,6 +6,17 @@ import (
 )
 
 func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		Title   string   `json:"title"`
+		Year    int32    `json:"year"`
+		Runtime int32    `json:runtime`
+		genres  []string `json:"genres`
+	}
+
+	err := app.readJson(w, r, &input)
+	if err != nil {
+		return
+	}
 	fmt.Fprintln(w, "Create a movie")
 }
 
