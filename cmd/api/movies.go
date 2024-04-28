@@ -5,15 +5,16 @@ import (
 	"net/http"
 )
 
-func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Request) {
-	var input struct {
-		Title   string   `json:"title"`
-		Year    int32    `json:"year"`
-		Runtime int32    `json:runtime`
-		genres  []string `json:"genres`
-	}
+type Movie struct {
+	Title   string   `json:"title"`
+	Year    int32    `json:"year"`
+	Runtime int32    `json:runtime`
+	genres  []string `json:"genres`
+}
 
-	err := app.readJson(w, r, &input)
+func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Request) {
+	movie := Movie{}
+	err := app.readJson(w, r, &movie)
 	if err != nil {
 		return
 	}
